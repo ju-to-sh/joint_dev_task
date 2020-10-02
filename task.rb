@@ -133,8 +133,8 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-  puts (data1.has_key?(:age)) ? "OK" : "NG"
-  puts (data2.has_key?(:age)) ? "OK" : "NG"
+  puts data1.has_key?(:age) ? "OK" : "NG"
+  puts data2.has_key?(:age) ? "OK" : "NG"
 
 end
 
@@ -154,9 +154,14 @@ end
 
 class UserQ17
   # 以下に回答を記載
-  attr_accessor :name, :age, :gender
+  # attr_accessor :name, :age, :gender
+  # def initialize(**params)
+  #   params.each { |k, v| self.send("#{k}=", v) if self.methods.include?(k) }
+  # end
   def initialize(**params)
-    params.each { |k, v| self.send("#{k}=", v) if self.methods.include?(k) }
+    @name = params[:name]
+    @age = params[:age]
+    @gender = params[:gender]
   end
 
   def info
@@ -180,7 +185,15 @@ end
 
 class UserQ18
   # 以下に回答を記載
+  def initialize(**params)
+    @name = params[:name]
+    @age = params[:age]
+  end
 
+  def introduce
+    @age >=20 ? "こんにちは，#{@name}と申します。宜しくお願いいたします。" :
+    "はいさいまいど〜，#{@name}です！！！"
+  end
 end
 
 def q18
@@ -195,8 +208,12 @@ end
 class Item
   # 以下を修正して下さい
 
-  def initialize(name)
-    @name = name
+  def initialize(**params)
+    @name = params[:name]
+  end
+
+  def name
+    @name
   end
 end
 
@@ -208,12 +225,38 @@ end
 
 class UserQ20
   # 以下に回答を記載
+  def initialize(**params)
+    @name = params[:name]
+    @age = params[:age]
+  end
 
+  def name
+    @name
+  end
+
+  def age
+    @age
+  end
 end
 
 class Zoo
   # 以下に回答を記載
+  def initialize(**params)
+    @zoo_name = params[:name]
+    @entry_fee = params[:entry_fee]
+  end
 
+  def info_entry_fee(user)
+    if user.age >= 0 && user.age <= 5
+      puts "#{user.name}の入場料金は #{@entry_fee[:infant]} 円です。"
+    elsif user.age >= 6 && user.age <= 12
+      puts "#{user.name}の入場料金は #{@entry_fee[:children]} 円です。"
+    elsif user.age >= 13 && user.age <= 64
+      puts "#{user.name}の入場料金は #{@entry_fee[:adult]} 円です。"
+    elsif user.age >= 65 && user.age <= 120
+      puts "#{user.name}の入場料金は #{@entry_fee[:senior]} 円です。"
+    end
+  end
 end
 
 
