@@ -232,30 +232,27 @@ end
 
 class Zoo
   # 以下に回答を記載
-  def initialize(**params)
-    @zoo_name = params[:name]
-    @entry_fee = params[:entry_fee]
+
+  def initialize(name:, entry_fee:) # キーワード引数に変更
+    @name = name
+    @entry_fee = entry_fee
   end
 
   def info_entry_fee(user)
+    fee = 0
+
     case user.age
     when 0..5
-      puts "#{user.name}の入場料金は #{@entry_fee[:infant]} 円です。"
+      fee += @entry_fee[:infant]
     when 6..12
-      puts "#{user.name}の入場料金は #{@entry_fee[:children]} 円です。"
+      fee += @entry_fee[:children]
     when 13..64
-      puts "#{user.name}の入場料金は #{@entry_fee[:adult]} 円です。"
+      fee += @entry_fee[:adult]
     when 65..120
-      puts "#{user.name}の入場料金は #{@entry_fee[:senior]} 円です。"
-    # if user.age >= 0 && user.age <= 5
-    #   puts "#{user.name}の入場料金は #{@entry_fee[:infant]} 円です。"
-    # elsif user.age >= 6 && user.age <= 12
-    #   puts "#{user.name}の入場料金は #{@entry_fee[:children]} 円です。"
-    # elsif user.age >= 13 && user.age <= 64
-    #   puts "#{user.name}の入場料金は #{@entry_fee[:adult]} 円です。"
-    # elsif user.age >= 65 && user.age <= 120
-    #   puts "#{user.name}の入場料金は #{@entry_fee[:senior]} 円です。"
+      fee += @entry_fee[:senior]
     end
+
+    puts "#{user.name}の入場料金は #{fee} 円です。"
   end
 end
 
